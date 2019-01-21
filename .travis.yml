@@ -1,0 +1,25 @@
+sudo: false
+language: php
+php:
+- 7.1
+- 7.0
+- nightly
+matrix:
+  fast_finish: true
+  allow_failures:
+  - php: nightly
+cache:
+  apt: true
+  directories:
+  - "$HOME/.composer/cache"
+  - vendor
+before_install:
+- phpenv config-rm xdebug.ini || true
+- composer self-update
+install:
+- composer install -o --prefer-dist --no-interaction
+script:
+- composer test
+deploy:
+  api_key:
+    secure: fGYyuYAuR9iIQXpBlu9DKXw+sPivf4FMIAOGtqCf+j/d/FS8H1KXvdfx14Urm95MfUTa8l4l28wv8CAouZEt+S7zwABwfRr/5GwMJNmspoxvsFd92Nd77/3P6S5RmuwjfKd7pPwDoGhPDnrVLM4eYTelL3Y7nN8vFKL9FW9ssji55L8vTzlyaOHiJ4Q8Cedx1uChzG2vEoOXotAVhP0vbyRUayzd17iLYiIYRBMu2f4lUz+fmJr+pjUABYEY3a6IC5QGQcYq9TpMaQwru985UnToXOeFs6Oh9O8HrY6G0+LCysp94Ga0Fbd4/9nyrL90Wtu3NLeYzPBLQGUku2EKloVvojRrV+SPlQvk/39D4zZM+K58i1w7B1VxQCUluTzbNC61Pl6xtjNdwQcNHiGsFqkvTLGsOottaRa/fvb0Ygx4KvEmvbzSx6xfMZ/fIwrE21XQ2dgCBN9ropImDGl15Kal2iZlGHB6Xm+gvAvKbZtVt2kFFK9D45IJAFE6Z7dCO/jXJc40UQz1Z1Vqt/I74CV+NPrpR67OHIRYbvESgMr3TzI0OGSjowAYjlvFOPYU7LKJN9MeUebaLwXUhnYTlwgbrPGJBbhyv0SFcMrCxPq2LUv91c7fhOTB/yPmPFDXUHLhZQ8MwzYii3YOJjgcncsGGZ2VJAK5uZlet/GGsBY=
